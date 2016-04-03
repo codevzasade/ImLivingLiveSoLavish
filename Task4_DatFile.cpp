@@ -7,18 +7,18 @@ int main()
 {
 	const int n = 10; 
 	int i, j;
-	FILE * f = fopen("F.dat", "wb"); // файл для записи 
-	int matrix[n][n], temp, index1, index2, index3, index4, MaxItem, MinItem; //выделяем динамическую память для матрицы
+	FILE * f = fopen("F.dat", "wb"); 
+	int matrix[n][n], temp, index1, index2, index3, index4, MaxItem, MinItem; 
 	srand(time(0));
 	for (i = 0; i < n; i++)
 	{
 		for (j = 0; j < n; j++)
 		{
-			matrix[i][j] = rand() % 200 + 100; // заполнение матрицы 
-			printf("%d ", matrix[i][j]);	  // вывод на экран 
-			fprintf(f, "%d", matrix[i][j]);	  // запись у файл 
+			matrix[i][j] = rand() % 200 + 100;
+			printf("%d ", matrix[i][j]);	  
+			fprintf(f, "%d", matrix[i][j]);	  
 		}
-		printf("\n"); fprintf(f, "\n");        // на новую строчку для красоты:)
+		printf("\n"); fprintf(f, "\n");        
 
 	}
 	printf("\n");
@@ -60,11 +60,11 @@ int main()
 	{
 		for (j = 0; j < n; j++)
 		{
-			printf("%d ", matrix[i][j]);	  // вывод на экран 
+			printf("%d ", matrix[i][j]);	  
 		}
-		printf("\n"); fprintf(f, "\n");        // на новую строчку для красоты:)
+		printf("\n"); fprintf(f, "\n");   
 	}
 	printf("\n");
-	fclose(f); // закрываем файл 
+	fclose(f); 
 	return 0;
 }
