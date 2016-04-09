@@ -3,68 +3,71 @@
 #include <stdlib.h>
 #include "time.h"
 
+#define n 10
+
 int main()
 {
-	const int n = 10; 
 	int i, j;
-	FILE * f = fopen("F.dat", "wb"); 
-	int matrix[n][n], temp, index1, index2, index3, index4, MaxItem, MinItem; 
-	srand(time(0));
+	/*part1_zadanie_dannix*/
+	FILE * f;
+	fopen_s(&f, "First.dat", "w");
+	int free[n][n], temp, max_i, max_j, min_i, min_j, MaxItem, MinItem;
+	srand(time(NULL));
+	/*gen massiv*/
 	for (i = 0; i < n; i++)
 	{
 		for (j = 0; j < n; j++)
 		{
-			matrix[i][j] = rand() % 200 + 100;
-			printf("%d ", matrix[i][j]);	  
-			fprintf(f, "%d", matrix[i][j]);	  
+			free[i][j] = rand() % 26 + 97;
+			printf("%d\t", free[i][j]);
 		}
-		printf("\n"); fprintf(f, "\n");        
 
 	}
+	fwrite(&free, 1, sizeof(free), f);
+	fclose(f);
 	printf("\n");
+	/*part2_Sortiovka*/
+	FILE * g;
+	fopen_s(&g, "Two.dat", "w");
 	for (i = 0; i < n; i++)
 	{
-		MaxItem=0;MinItem=n;
-		index1=0;index2=0;index3=0;index4=0;
-		//printf("line:%d\n", i);
+		MaxItem=MinItem=0;
+		max_i=max_j=min_i=min_j=0;
 		for (j = 0; j < n; j++)
 		{
-			if(matrix[i][j] > MaxItem)
+			if (free[i][j] > MaxItem)
 			{
-				MaxItem=matrix[i][j];
-				index1=i;
-				index2=j;
+				MaxItem = free[i][j];
+				max_i = i;
+				max_j = j;
 			}
 		}
-		MinItem=MaxItem;
+		MinItem = MaxItem;
 		for (j = 0; j < n; j++)
 		{
-			if(matrix[i][j] < MinItem)
+			if (free[i][j] < MinItem)
 			{
-				MinItem=matrix[i][j];
-				index3=i;
-				index4=j;
-				//printf(" MinItem:%d i=%d j=%d ", MinItem, index3, index4);
+				MinItem = free[i][j];
+				min_i = i;
+				min_j = j;
 			}
 		}
-		//printf("\n");
-			temp=matrix[index1][index2];
-			matrix[index1][index2]=matrix[index3][index4];
-			matrix[index3][index4]=temp;
-			fprintf(f, "%d", matrix[index3][index4]);
-			fprintf(f, "%d", matrix[index1][index2]);
-			printf("line %d | Min: %d <-> Max: %d\n", i, matrix[index1][index2], matrix[index3][index4]);
+		temp = free[max_i][max_j];
+		free[max_i][max_j] = free[min_i][min_j];
+		free[min_i][min_j] = temp;
+		printf("\t\t line %d  | MinItem:%d \t MaxItem:%d |\n", i, free[max_i][max_j], free[min_i][min_j]);
 	}
 	printf("\n");
+	fwrite(&free, 1, sizeof(free), g);
+	/* vivod massiva*/
 	for (i = 0; i < n; i++)
 	{
 		for (j = 0; j < n; j++)
 		{
-			printf("%d ", matrix[i][j]);	  
+			printf("%d\t", free[i][j]);
 		}
-		printf("\n"); fprintf(f, "\n");   
 	}
-	printf("\n");
-	fclose(f); 
+	fclose(g);
+	getchar();
 	return 0;
 }
