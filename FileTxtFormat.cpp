@@ -6,7 +6,6 @@ int main()
 {
 	FILE * f;
 	fopen_s(&f, "CODE.txt", "r");
-	char item, elementy[4] = { '(', ')', '\n'};
 	int open, close, line, end, position, byte, bstr; // item'i
 	open = close = line = end = 0;
 	byte = bstr = 0; // s ychetom 1 elemt 0 po spisky
