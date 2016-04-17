@@ -1,0 +1,35 @@
+#include "stdafx.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct nd {
+	int val; // element of list
+	struct nd *next; // указывает на следующий узел списка
+} ND;
+
+void print(ND *); // функция печати списка
+
+int main(void) {
+	ND *first; //  указатель на начало списка
+	ND *r;
+	int v;
+
+	first = r = (ND*)malloc(sizeof(ND));
+	scanf_s("%d", &v);  // ввод чисел с клавиатуры
+	r->val = v;
+	while (scanf_s("%d", &v) == 1) {   //  ввод чисел с клавиатуры и сохранение в односвязном списке
+		r = r->next = (ND*)malloc(sizeof(ND));
+		r->val = v;
+		r->next = NULL;
+	}
+	printf("\n%s", "List general: ");
+	print(first); // вывод созданного неупорядоченного списка
+	return 0;
+}
+
+void print(ND * start) {
+	while (start != NULL) {
+		printf("%d ", start->val);
+		start = start->next;
+	}
+}
